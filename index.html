@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Magical Winter - pure css - #02</title>
+    <title>జామి వారి పెండ్లి పిలుపు</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style.css">
   </head>
@@ -11,9 +11,9 @@
 
 <div id="welcome-popup" class="popup-overlay">
   <div class="popup-box">
-    <h3 id="popup-title">Welcome to Magical Winter!</h3>
+    <h3 id="popup-title">Jamee's Invitestion </h3>
     <img id="popup-img" src="img/couple.jpg" alt="Winter Scene" style="width: 100%; border-radius: 8px; margin: 15px 0; display: block;">
-    <p id="popup-text">Enjoy the magical winter scenery. Click on the trees or the bench to interact!</p>
+    <p id="popup-text">Save Date 10/05/2026!</p>
     
     <button id="close-Btn">Close</button>
     <div id="checkbox-wrap" class="checkbox-container">
@@ -190,7 +190,7 @@
       popup.classList.add('popup-hidden');
     } else {
       // Show initial welcome with couple image
-      showPopup('Welcome to Magical Winter!', 'img/couple.jpg', 'Enjoy the magical winter scenery. Click on the trees or the bench to interact!', true);
+      showPopup('జామి వారి పెండ్లీ పిలుపు!', 'img/couple.jpg', 'Enjoy the magical winter scenery. Click on the trees or the bench to interact!', true);
     }
 
     if (closeBtn) {
@@ -209,19 +209,19 @@
     // Click Interactions
     if (leftTree) {
       leftTree.addEventListener('click', () => {
-        showPopup('The Left Tree', 'img/male.jpg', 'You clicked the Left Tree!');
+        showPopup('వరుడు: సురేష్', 'img/male.jpg', 'You clicked the Left Tree!');
       });
     }
 
     if (rightTree) {
       rightTree.addEventListener('click', () => {
-        showPopup('The Right Tree', 'img/female.jpg', 'You clicked the Right Tree!');
+        showPopup('వధువు: సునీతా', 'img/female.jpg', 'You clicked the Right Tree!');
       });
     }
 
     if (bench) {
       bench.addEventListener('click', () => {
-        showPopup('The Park Bench', 'img/couple.jpg', 'A cozy spot for two!');
+        showPopup('G కన్వెన్షన్, పొందూరు, రోడ్, శ్రీకాకుళం', 'img/couple.jpg', 'save date 10/05/2026!');
       });
     }
   });
