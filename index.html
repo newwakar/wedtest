@@ -9,21 +9,21 @@
     
   <body>
 
-    <div id="welcome-popup" class="popup-overlay">
-      <div class="popup-box">
-        <h3>Welcome to Magical Winter!</h3>
-        <p>Enjoy the magical winter scenery. Click on the trees or the bench to interact!</p>
-        
-        <button id="closeBtn">Close</button>
-        <div class="checkbox-container">
-          <input type="checkbox" id="dont-show-again">
-          <label for="dont-show-again">Don't show again</label>
-        </div>
-      </div>
+<div id="welcome-popup" class="popup-overlay">
+  <div class="popup-box">
+    <h3 id="popup-title">Welcome to Magical Winter!</h3>
+    <img id="popup-img" src="img/couple.jpg" alt="Winter Scene" style="width: 100%; border-radius: 8px; margin: 15px 0; display: block;">
+    <p id="popup-text">Enjoy the magical winter scenery. Click on the trees or the bench to interact!</p>
+    
+    <button id="close-Btn">Close</button>
+    <div id="checkbox-wrap" class="checkbox-container">
+      <input type="checkbox" id="dont-show-again">
+      <label for="dont-show-again">Don't show again</label>
     </div>
-
+  </div>
+</div>
+     
     <div class="background-linear"></div>
-
     <div class="wrapper">
       <div class="winter-wrapper">
         <div class="snow-wrapper big">
@@ -164,49 +164,67 @@
 
     <a href="https://maps.app.goo.gl/EKgNoPKHfNQBTcJG8" target="_blank" class="location-tag">
   Location: G Convention, ponduru road, srikakulam
-</a>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const popup = document.getElementById('welcome-popup');
-        const closeBtn = document.getElementById('closeBtn');
-        const dontShowCheckbox = document.getElementById('dont-show-again');
+</a><script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('welcome-popup');
+    const closeBtn = document.getElementById('close-Btn');
+    const dontShowCheckbox = document.getElementById('dont-show-again');
+    const popupTitle = document.getElementById('popup-title');
+    const popupImg = document.getElementById('popup-img');
+    const popupText = document.getElementById('popup-text');
+    const checkboxWrap = document.getElementById('checkbox-wrap');
 
-        // Check if preferences were saved previously
-        if (localStorage.getItem('hideWelcomePopup') === 'true') {
-          popup.classList.add('popup-hidden');
+    // Central function to handle all popup content
+    const showPopup = (title, imgSrc, message, isWelcome = false) => {
+      popupTitle.textContent = title;
+      popupImg.src = imgSrc;
+      popupText.textContent = message;
+      
+      // Hide the "Don't show again" option for object clicks
+      checkboxWrap.style.display = isWelcome ? 'block' : 'none';
+      popup.classList.remove('popup-hidden');
+    };
+
+    // Check for "Don't show again" preference on load
+    if (localStorage.getItem('hideWelcomePopup') === 'true') {
+      popup.classList.add('popup-hidden');
+    } else {
+      // Show initial welcome with couple image
+      showPopup('Welcome to Magical Winter!', 'img/couple.jpg', 'Enjoy the magical winter scenery. Click on the trees or the bench to interact!', true);
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (dontShowCheckbox && dontShowCheckbox.checked) {
+          localStorage.setItem('hideWelcomePopup', 'true');
         }
-
-        if (closeBtn) {
-          closeBtn.addEventListener('click', () => {
-            if (dontShowCheckbox && dontShowCheckbox.checked) {
-              localStorage.setItem('hideWelcomePopup', 'true');
-            }
-            popup.classList.add('popup-hidden');
-          });
-        }
-
-        const leftTree = document.querySelector('.tree:not(.right)');
-        const rightTree = document.querySelector('.tree.right');
-        const bench = document.querySelector('.bench');
-
-        if (leftTree) {
-          leftTree.addEventListener('click', () => {
-            alert('You clicked the Left Tree!');
-          });
-        }
-
-        if (rightTree) {
-          rightTree.addEventListener('click', () => {
-            alert('You clicked the Right Tree!');
-          });
-        }
-
-        if (bench) {
-          bench.addEventListener('click', () => {
-            alert('You clicked the bench!');
-          });
-        }
+        popup.classList.add('popup-hidden');
       });
-    </script>
+    }
+
+    const leftTree = document.querySelector('.tree:not(.right)');
+    const rightTree = document.querySelector('.tree.right');
+    const bench = document.querySelector('.bench');
+
+    // Click Interactions
+    if (leftTree) {
+      leftTree.addEventListener('click', () => {
+        showPopup('The Left Tree', 'img/male.jpg', 'You clicked the Left Tree!');
+      });
+    }
+
+    if (rightTree) {
+      rightTree.addEventListener('click', () => {
+        showPopup('The Right Tree', 'img/female.jpg', 'You clicked the Right Tree!');
+      });
+    }
+
+    if (bench) {
+      bench.addEventListener('click', () => {
+        showPopup('The Park Bench', 'img/couple.jpg', 'A cozy spot for two!');
+      });
+    }
+  });
+</script>
   </body>
 </html>
